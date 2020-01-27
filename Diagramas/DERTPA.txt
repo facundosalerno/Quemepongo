@@ -1,0 +1,137 @@
+@startuml
+
+entity PRENDAS {
+  id (PK)
+  --
+  nombre
+  material
+  estado
+  trama
+  rojo_color_primario
+  azul_color_primario
+  verde_color_primario
+  rojo_color_secundario
+  azul_color_secundario
+  verde_color_secundario
+  tipoPrenda_id (FK)
+  guardarropas_superiores_id (FK)
+  guardarropas_inferiores_id (FK)
+  guardarropas_accesorios_id (FK)
+  guardarropas_calzados_id (FK)
+  url
+}
+
+entity TIPOS_DE_PRENDA {
+  id (PK)
+  --
+  categoria
+  nivelDeCapa
+  rangoInferior
+  rangoSuperior
+}
+
+entity ATUENDOS{
+	id (PK)
+	--
+	calificacion
+	estado
+	accesorio_id (FK)
+	calzado_id (FK)
+	prendaInferior_id (FK)
+	usuarioId_atuendosRechazados (FK)
+	usuarioId_atuendosCalificados (FK)
+	usuarioId_atuendosAceptados (FK)
+}
+entity DECISIONES{
+	id (PK)
+	--
+	atuendo_id (FK)
+	tipo_decision
+	usuarioId_decisiones (FK)
+}
+
+entity EVENTOS{
+	id (PK)
+	--
+	fecha
+	frecuencia
+	lugar
+	nombre
+	usuario_id (FK)
+	usuarioId_eventos (FK)
+}
+
+entity EVENTOS_ATUENDOS{
+	Evento_id (PK/FK)
+	sugerenciasObtenidas_id (PK/FK)
+}
+
+entity GUARDARROPAS{
+	id (PK)
+	--
+	nombre
+	tipo_guardarropas
+}
+
+entity MATERIALES_VALIDOS{
+	tipoPrenda_id (PK/FK)
+	material (PK) 
+}
+
+
+entity MEDIOS_DE_NOTIFICACION{
+	id (PK)
+	--
+	numero
+	email
+	usuarioId_mediosDeNotificacion (FK)
+	tipo_medioDeNotificacion
+}
+
+entity USUARIOS{
+	id (PK)
+	--
+	nombre
+	hashPass
+	tipoDeUsuario
+}
+
+entity USUARIOS_GUARDARROPAS{
+	Usuario_id (PK/FK)
+	guardarropas_id (PK/FK)
+}
+PRENDAS }|--|| TIPOS_DE_PRENDA
+
+USUARIOS ||--|{ USUARIOS_GUARDARROPAS
+
+USUARIOS_GUARDARROPAS }|--||GUARDARROPAS
+
+USUARIOS ||--|{ EVENTOS
+
+USUARIOS ||--|{ DECISIONES
+
+USUARIOS ||--|{ ATUENDOS
+
+USUARIOS ||--|{ ATUENDOS
+
+USUARIOS ||--|{ ATUENDOS
+
+USUARIOS ||--|{ MEDIOS_DE_NOTIFICACION
+
+EVENTOS }|--|| USUARIOS
+
+EVENTOS ||--|{ EVENTOS_ATUENDOS
+
+EVENTOS_ATUENDOS }|--|| ATUENDOS
+
+ATUENDOS ||--|{ PRENDAS
+
+ATUENDOS ||--|| PRENDAS
+ATUENDOS ||--|| PRENDAS
+ATUENDOS ||--|| PRENDAS
+
+DECISIONES ||--|| ATUENDOS
+
+TIPOS_DE_PRENDA ||--|{ MATERIALES_VALIDOS
+
+@enduml

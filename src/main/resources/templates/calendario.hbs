@@ -1,0 +1,95 @@
+{{#partial "body"}}
+    <div class="container calendar-container">
+        <div class="container">
+            <div class="row" style="padding-top:10px;">
+                <div class="col">
+                    <h5 class="card-title text-capitalize">Mis eventos</h5>
+                </div>
+                <div class="col" style="text-align: right;">
+                    <form action="/evento/wizard" method="GET" >
+                        <button class="btn btn-primary">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <header class="shadow">
+                    <div class="day">{{hoy}}</div>
+                    <div class="month">{{mes}}</div>
+                </header>
+                <table class="calendar shadow">
+                    <thead>
+                    <tr>
+                        <td>LUN</td>
+                        <td>MAR</td>
+                        <td>MIE</td>
+                        <td>JUE</td>
+                        <td>VIE</td>
+                        <td>SAB</td>
+                        <td>DOM</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each diasDelMes}}
+                        {{#if esHoy}}
+                            <tr>
+                                {{#if hayEvento}}
+                                    <td class="current-day">{{numeroDia}}•</td>
+                                {{else}}
+                                    <td class="current-day">{{numeroDia}}</td>
+                                {{/if}}
+                            </tr>
+                        {{else if esOffset}}
+                            <tr><td></td></tr>
+                        {{else}}
+                            <tr>
+                                {{#if hayEvento}}
+                                    <td>{{numeroDia}}•</td>
+                                {{else}}
+                                    <td>{{numeroDia}}</td>
+                                {{/if}}
+                            </tr>
+                        {{/if}}
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div> <!-- end calendar-container -->
+
+
+            <div class="col" style="height: 558px; width:553px; overflow:auto;">
+                <table class="table shadow lista-de-eventos table-borderless">
+                    <thead>
+                    <tr>
+                        <th scope="col" style="border-radius: 10px 0 0 0;">Evento</th>
+                        <th scope="col">Lugar</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col" style="border-radius: 0 10px 0 0;">Sugerencias</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each eventosDelUsuario}}
+                        <tr>
+                            <th scope="row">{{nombre}}</th>
+                            <td>{{lugar}}</td>
+                            <td>{{fecha}}</td>
+                            <td>
+                                <form action="/evento/{{nombre}}/sugerencias" method="GET">
+                                    <button class="btn btn-primary">Ver</button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{else}}
+                        <tr>
+                            <th scope="row"></th>
+                            <td>No hay eventos</td>
+                            <td></td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- end container -->
+{{/partial}}
+{{>encabezado.hbs}}

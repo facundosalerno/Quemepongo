@@ -1,0 +1,23 @@
+{{#partial "body"}}
+    <div class="contenedor_guardarropas">
+    {{#each guardarropas}}
+        <div class="card guardarropa">
+            <form action="/guardarropas/{{id}}/prendas" method="GET">
+                <img src="/remera.png" class="card-img-top" alt="Remera">
+                <div class="card-body">
+                    <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                    <button class="btn btn-primary">Ver</button>
+                </div>
+            </form>
+        </div>
+    {{/each}}
+        <div class="card guardarropa">
+            <div class="card-body text-center">
+                <button class="card-text text-center" id="button_plus" onclick="alert('No disponible.')">
+                    <img src="/ic_plus.png">
+                </button>
+            </div>
+        </div>
+    </div>
+{{/partial}}
+{{>encabezado.hbs}}

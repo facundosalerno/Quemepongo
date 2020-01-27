@@ -1,0 +1,81 @@
+{{#partial "body"}}
+    <div class="contenedor_sugerencias">
+        <div class="container" style="margin-bottom: 20px;">
+            <div class="row" style="padding-top:10px;">
+                <div class="col">
+                    <h5 class="card-title text-capitalize">Sugerencias calculadas</h5>
+                </div>
+            </div>
+        </div>
+        {{#each sugerenciasObtenidas}}
+            <div class="card mb-3 shadow prenda">
+                <div class="row no-gutters">
+                    {{#each prendasSuperiores}}
+                        <div class="col-md-4">
+                            {{#if imagen}}
+                                <img src="{{this.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                            {{else}}
+                                <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                            {{/if}}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">{{nombre}}</h5>
+                                <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                            </div>
+                        </div>
+                    {{/each}}
+
+                    <div class="col-md-4">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{prendaInferior.nombre}}</h5>
+                            <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{calzado.nombre}}</h5>
+                            <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        {{#if prendaInferior.imagen}}
+                            <img src="{{prendaInferior.imagen.url}}" class="card-img imagen_prenda" alt="Remera">
+                        {{else}}
+                            <img src="/remera.png" class="card-img imagen_prenda" alt="Remera">
+                        {{/if}}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{accesorio.nombre}}</h5>
+                            <p class="card-text"><small class="text-muted">La prenda podria estar siendo usada por alguien mas.</small></p>
+                        </div>
+                    </div>
+                    <div class="container" style="text-align: right;">
+                        <form action="/evento/{{../nombre}}/sugerencias/{{id}}" method="POST" >
+                            <button class="btn btn-primary">Aceptar sugerencia</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
+{{/partial}}
+{{>encabezado.hbs}}

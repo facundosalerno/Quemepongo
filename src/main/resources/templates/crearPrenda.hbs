@@ -1,0 +1,205 @@
+{{#partial "body"}}
+    <form class="creador_prendas_wizard" action="/guardarropas/{{id}}/prendas" method="POST">
+        <div class="container" style="margin-bottom: 20px;">
+            <div class="row" style="padding-top:10px;">
+                <div class="col">
+                    <h5 class="card-title text-capitalize">Crear prenda</h5>
+                </div>
+                <div class="col" style="text-align: right;">
+                    <a class="btn btn-primary" style="color: white;" onclick="goBack()">Cancelar</a>
+                    <button class="btn btn-primary">Listo</button>
+                </div>
+            </div>
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nombre de la prenda
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="query_nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Nombre">
+                        </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne" id="idBoton" style="color: white;">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Tipo de prenda
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Elegir</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="query_tipoPrenda">
+                                <option>Zapato</option>
+                                <option>Remera</option>
+                                <option>Camisa</option>
+                                <option>Pantalon</option>
+                                <option>Short</option>
+                                <option>Blusa</option>
+                                <option>Zapatillas</option>
+                                <option>Pollera</option>
+                                <option>Ojotas</option>
+                                <option>Alpargatas</option>
+                                <option>Pulsera</option>
+                                <option>Anteojos</option>
+                                <option>Buso</option>
+                                <option>Sweatter</option>
+                                <option>Campera</option>
+                                <option>Sin accesorio</option>
+                            </select>
+                        </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo" id="idBoton" style="color: white;">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Material de la prenda
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleFormControlSelect1">Elegir</label>
+                                <select class="form-control" id="exampleFormControlSelect1" name="query_material">
+                                    <option>Ninguno</option>
+                                    <option>Algodon</option>
+                                    <option>Seda</option>
+                                    <option>Lino</option>
+                                    <option>Cuero</option>
+                                    <option>Lana</option>
+                                    <option>Licra</option>
+                                    <option>Poliester</option>
+                                    <option>Jean</option>
+                                    <option>Gamuza</option>
+                                    <option>Goma</option>
+                                    <option>Plastico</option>
+                                    <option>Pluma</option>
+                                    <option>Gabardina</option>
+                                </select>
+                            </div>
+                            <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseThree" id="idBoton" style="color: white;">Siguiente</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingFour">
+                    <h2 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Color
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="input-group" style="padding: 4px 0;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input" checked="checked" disabled name="query_colorp_enabled">
+                                </div>
+                            </div>
+                            <div class="input-group-prepend" style="width: 110px">
+                                <span class="input-group-text" style="width: 110px">Primario</span>
+                            </div>
+                            <input type="number" aria-label="First name" class="form-control" placeholder="R" value="0" name="query_colorp_r">
+                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" value="0" name="query_colorp_g">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="B" value="0" name="query_colorp_b">
+                        </div>
+                        <div class="input-group" style="padding: 8px 0;">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <input type="checkbox" aria-label="Checkbox for following text input" name="query_colors_enabled">
+                                </div>
+                            </div>
+                            <div class="input-group-prepend" style="width: 110px">
+                                <span class="input-group-text" style="width: 110px">Secundario</span>
+                            </div>
+                            <input type="number" aria-label="First name" class="form-control" placeholder="R" value="0" name="query_colors_r">
+                            <input type="number" aria-label="Last name" class="form-control" placeholder="G" value="0" name="query_colors_g">
+                            <input type="number" aria-label="First name" class="form-control" placeholder="B" value="0" name="query_colors_b">
+                        </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFour" id="idBoton" style="color: white;">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingFive">
+                    <h2 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            Trama
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Elegir</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="query_trama">
+                                <option>Lisa</option>
+                                <option>Rayada</option>
+                                <option>Cuadros</option>
+                                <option>Gastado</option>
+                                <option>Escocesa</option>
+                            </select>
+                        </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseFive" id="idBoton" style="color: white;">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingSix">
+                    <h2 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            Imagen
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroup-sizing-default">URL</span>
+                            </div>
+                            <input type="text" class="form-control" name="query_imagen" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="http://imagen.com/example">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
+{{/partial}}
+{{>encabezado.hbs}}

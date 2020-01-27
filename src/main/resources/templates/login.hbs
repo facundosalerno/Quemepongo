@@ -1,0 +1,17 @@
+{{#partial "body"}}
+    <div class="container contenedor_login shadow-sm">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="inputEmail1">Usuario</label>
+                <input type="username" name="query_username" class="form-control" id="inputUsername1" aria-describedby="userHelp" placeholder="Usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword1">Contraseña</label>
+                <input type="password" name="query_password" class="form-control" id="inputPassword1" placeholder="Contraseña" required>
+                <small id="hint" class="form-text text-muted">{{mensajeSesion}}</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </form>
+    </div>
+{{/partial}}
+{{>encabezadoBase.hbs}}

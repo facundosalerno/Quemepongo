@@ -1,0 +1,262 @@
+@startuml
+
+class Usuario {
+   List<Guardarropas> guardarropas
+   List<Evento> eventos
+   Deque<Decision> decisiones
+   List<Atuendo> atuendosAceptados
+   List<Atuendo> atuendosRechazados
+   TipoDeUsuario tipoDeUsuario
+
+   obtenerSugerenciasDeTodosSusGuardarropas(Meteorologo meteorologo)
+   obtenerSugerencias()
+   cargarEvento(nombreEvento,fechaYHora,lugar)
+   List<Atuendo> recibirSugerenciasEvento(nombreEvento,fechaEvento)
+   deshacerUltimaDecision()
+   aceptarSugerencia(Atuendo atuendo)
+   rechazarSugerencia(Atuendo atuendo)
+}
+
+
+enum TipoDeUsuario{
+    PREMIUM
+    GRATIS
+}
+
+class Evento{
+	String nombre
+    	LocalDateTime fecha
+    	String lugar
+    	Usuario usuario
+    	List<Atuendo> sugerenciasObtenidas
+	generarSugerencias(meteorologo)
+	List<Atuendo> obtenerSugerencias()
+
+}
+abstract class Decision{
+	Atuendo atuendo
+	deshacer()
+}
+
+class Aceptar{
+	Atuendo atuendo
+	deshacer()
+}
+class Rechazar{
+	Atuendo atuendo
+	deshacer()
+}
+
+
+class Prenda{
+    TipoDePrenda tipoPrenda
+    Material material
+    Color colorPrimario
+    Color colorSecundario
+    Trama trama
+    Imagen imagen
+    definirImagen(pathDeArchivo)	
+}
+
+class Imagen{
+	int alto
+	int ancho
+	BufferedImage imagen
+}
+class Color{
+    int  rojo, verde, azul
+}
+
+class TipoDePrenda{
+   Categoria categoria
+   List<Material> materialesValidos
+   TemperaturaAdecuadaPrenda temperatura
+   boolean permiteMaterial(material)
+   Categoria categoria()
+   temperaturaResistida()
+   esAptaParaTemperatura(int temperatura)	
+
+}
+
+class TemperaturaAdecuadaPrenda {
+    int rangoMaximo
+    int rangoMinimo
+    boolean importaLaTemperatura
+    boolean temperaturaSeEncuentraEnElRango(int temperatura)
+}
+
+class BorradorPrenda{
+    tipoPrenda
+    material
+    colorPrimario
+    colorSecundario
+    trama = LISA
+
+    definirTipo(tipoPrenda)
+    definirMaterial(material)
+    definirColorPrimario(color) 
+    definirColorSecundario(color)
+    definirTrama(trama)
+    Prenda crearPrenda()
+}
+class Atuendo{
+    Capa prendaSuperior
+    Capa prendaInferior
+    Capa calzado
+    Capa accesorio
+    Estado estado
+    
+}
+
+abstract class Capa{
+  Categoria getCategoria()
+  boolean abrigaBien()
+  void cambiarEstado(Estado)
+  boolean capaFueAceptada()
+}
+
+class CapaSimple{
+  Prenda prenda
+}
+
+class CapaCompuesta{
+  List<CapaSimple> capasPrendas
+  boolean estaBienOrdenada()
+
+}
+
+enum Estado {
+    NUEVO
+    ACEPTADO
+    RECHAZADO
+}
+
+abstract class Guardarropas{
+    prendasSuperiores
+    prendasInferiores
+    calzados
+    accesorios
+    TipoDeUsuario tipoDeUsuarioQueAcepta()
+    sugerirAtuendo(meteorologo)
+}
+
+class GuardarropasLimitado{
+	prendasSuperiores
+	prendasInferiores
+	calzados
+	accesorios
+	cantidadPrendasPermitidas()
+	TipoDeUsuario tipoDeUsuarioQueAcepta()
+}
+class GuardarropasPremium{
+	prendasSuperiores
+	prendasInferiores
+	calzados
+	accesorios
+	TipoDeUsuario tipoDeUsuarioQueAcepta()
+}
+
+
+enum Categoria {
+    PARTE_SUPERIOR
+    CALZADO
+    PARTE_INFERIOR
+    ACCESORIOS
+}
+
+enum Material{
+    ALGODON
+    SEDA
+    LINO
+    CUERO
+    LANA
+    LICRA
+    POLIESTER
+    JEAN
+    GAMUZA
+    GOMA
+    PLASTICO
+}
+enum Trama {
+    LISA
+    RAYADA
+    CUADROS
+    GASTADO
+}
+
+abstract class Clima{
+	double temp
+	double getTemperature()
+}
+class TemperaturaAccuWeather{
+	double getTemperature()
+}
+class TemperaturaOpenWeather{
+	double getTemperature()
+}
+
+interface Meteorologo{
+	Clima obtenerClima()
+}
+class AccuWeather{
+	TemperaturaAccuWeather obtenerClima() 
+}
+class OpenWeather{
+	OpenWeather obtenerClima() 
+}
+
+
+
+Prenda-->Color
+Prenda-->Color
+Prenda-->Trama
+Prenda-->Material
+Prenda-->TipoDePrenda
+Prenda-->Imagen
+
+TipoDePrenda --> TemperaturaAdecuadaPrenda
+TipoDePrenda-->"*"Material
+TipoDePrenda-->Categoria
+BorradorPrenda"constructor" ..>Prenda
+
+Atuendo-->Capa
+Atuendo-->Capa
+Atuendo-->Capa
+Atuendo-->Capa
+Atuendo-->Estado
+
+Capa<|--CapaSimple
+Capa<|--CapaCompuesta
+
+CapaCompuesta-->"*"CapaSimple
+CapaSimple-->Prenda
+
+Guardarropas-->"*"Prenda
+Guardarropas-->"*"Prenda
+Guardarropas-->"*"Prenda
+Guardarropas-->"*"Prenda
+Guardarropas..>Atuendo
+Guardarropas..>Capa
+
+Guardarropas<|--GuardarropasLimitado
+Guardarropas<|--GuardarropasPremium
+
+Guardarropas..>Meteorologo
+Meteorologo<|--AccuWeather
+Meteorologo<|--OpenWeather
+
+Meteorologo ..> Clima
+
+Clima<|--TemperaturaAccuWeather
+Clima<|--TemperaturaOpenWeather
+
+Usuario-->"*"Guardarropas
+Usuario-->"*"Atuendo
+Usuario-->"*"Atuendo
+Usuario-->"*"Decision
+Usuario-->"*"Evento
+Usuario-->TipoDeUsuario
+
+Decision<|--Aceptar
+Decision<|-- Rechazar
+@enduml

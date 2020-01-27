@@ -1,0 +1,82 @@
+{{#partial "body"}}
+    <!-- Nota: los nombres pueden ser raros ya que se esta reutilizando el wizard de la creacion de la prenda -->
+    <form class="creador_prendas_wizard" action="/evento" method="POST">
+        <div class="container" style="margin-bottom: 20px;">
+            <div class="row" style="padding-top:10px;">
+                <div class="col">
+                    <h5 class="card-title text-capitalize">Crear evento</h5>
+                </div>
+                <div class="col" style="text-align: right;">
+                    <a class="btn btn-primary" style="color: white;" onclick="goBack()">Cancelar</a>
+                    <button class="btn btn-primary">Listo</button>
+                </div>
+            </div>
+        </div>
+        <div class="accordion" id="accordionExample">
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Nombre
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="query_nombre" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Nombre del evento">
+                        </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne" id="idBoton" style="color: white;">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Fecha y hora
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="query_localDateTime" value="{{hoy}}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div>
+                        <a class="btn btn-primary"  data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo" id="idBoton" style="color: white;">Siguiente</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card shadow card_prendas_wizard">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Lugar
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="card-body">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="query_lugar" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="Lugar del evento">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
+{{/partial}}
+{{>encabezado.hbs}}

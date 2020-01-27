@@ -1,0 +1,16 @@
+{{#partial "body"}}
+    <div class="alert alert-danger center_alert_forbidden" role="alert">
+        <h4 class="alert-heading">Error al crear la prenda</h4>
+        <p>{{mensajeError}}</p>
+        <hr>
+        <p class="mb-0" style="padding: 4px 0;">Puede regresar y volver a intentarlo.</p>
+        <button class="btn btn-primary" onclick="goBack()">Regresar</button>
+    </div>
+
+    <script>
+        function goBack() {
+        window.history.back();
+        }
+    </script>
+{{/partial}}
+{{>encabezadoBase.hbs}}
